@@ -1,0 +1,62 @@
+<h2> Customer List</h2>
+<table class = "table table-striped">
+    <thead style="text-align: center;">
+        <tr>
+            <th> Name</th>
+            <th> Email Id</th>
+            <th> Phone </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody style="text-align: center;">
+        <tr *ngFor = "let customer of customer" >
+            <td> {{ customer.name }} </td>
+            <td> {{ customer.emailId }} </td>
+            <td> 0{{ customer.phone}} </td>
+            <td>
+                  <ng-template #content1 let-modal>
+                    <div class="modal-body">
+                      <p>Delete Data?&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                    <button (click) = "deleteCustomer(customer.id)" class = "btn btn-danger" style="margin-left: 10px"> Delete</button>
+                    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #longContent let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title">Detail employee</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div>
+                                <label> <b> Name: </b></label> {{customer.name}}
+                            </div>
+                            <div>
+                                <label> <b> Birthday: </b></label> {{customer.birthday | date:'YYYY-MM-DD'}}
+                            </div>
+                            <div>
+                                <label> <b> Email Id: </b></label> {{customer.emailId}}
+                            </div>
+                            <div>
+                              <label> <b> Phone Number:</b> 0</label>{{customer.phone}}
+                          </div>
+                          <div>
+                            <label> <b> Address: </b></label> {{customer.address}}
+                        </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                    </div>
+                  </ng-template>
+                <button (click) ="updateCustomer(customer.id)" class = "btn btn-info"> Update</button>
+                <button class="btn btn-danger" style="margin-left: 10px" (click)="deleteModal(content1)">Delete</button>
+                <button class="btn btn-info" style="margin-left: 10px"(click)="viewModal(longContent)">View</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
